@@ -11,8 +11,9 @@
 - Separation of converns
 - POC
 - Clear screen
+-
 
-# Tecnilogias
+# Tecnlogias
 
 - Javascript
 - Socket.io

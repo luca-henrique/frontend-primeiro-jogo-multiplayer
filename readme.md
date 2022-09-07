@@ -15,6 +15,7 @@
 - Acoplamento
 - Observer
 - Factory
+- Injeção de dependencia
 
 # Tecnlogias
 

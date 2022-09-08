@@ -23,16 +23,6 @@
       const context = screen.getContext('2d');
       const currentPlayerId = 'player1';
 
-      const state = {
-        players: {
-          player1: {x: 1, y: 1},
-          player2: {x: 9, y: 9},
-        },
-        fruits: {
-          fruit1: {x: 3, y: 1},
-        },
-      };
-
       const acceptedMoves = {
         ArrowUp(player) {
           console.log('Moving player up');
@@ -61,6 +51,28 @@
       };
 
       function createGame() {
+        const state = {
+          players: {},
+          fruits: {},
+        };
+
+        function addPlayer(command) {
+          const playerId = command.playerId;
+          const playerX = command.playerX;
+          const playerY = command.playerY;
+
+          state.players[playerId] = {
+            x: playerX,
+            y: playerY,
+          };
+        }
+
+        function removePlayer() {
+          const playerId = command.playerId;
+
+          delete state.players[playerId];
+        }
+
         function movePlayer(command) {
           console.log(`Moving ${command.playerId} with ${command.keyPressed}`);
           const keyPressed = command.keyPressed;
@@ -119,13 +131,13 @@
         context.fillStyle = 'white';
         context.clearRect(0, 0, 10, 10);
 
-        for (const playerId in state.players) {
+        for (const playerId in game.state.players) {
           const player = state.players[playerId];
           context.fillStyle = 'black';
           context.fillRect(player.x, player.y, 1, 1);
         }
 
-        for (const fruitId in state.fruits) {
+        for (const fruitId in game.state.fruits) {
           const fruit = state.fruits[fruitId];
           context.fillStyle = 'green';
           context.fillRect(fruit.x, fruit.y, 1, 1);

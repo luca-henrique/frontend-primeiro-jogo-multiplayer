@@ -13,10 +13,15 @@
 - Clear screen
 - Arquitetura de Software
 - Acoplamento
-- Observer
-- Factory
 - Injeção de dependencia
 - Object literals
+
+# Design Patterns
+
+- Command
+- Strategy
+- Observer
+- Factory
 
 # Tecnlogias
 

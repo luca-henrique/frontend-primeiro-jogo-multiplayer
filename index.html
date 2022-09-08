@@ -25,25 +25,21 @@
 
       const acceptedMoves = {
         ArrowUp(player) {
-          console.log('Moving player up');
           if (player.y - 1 >= 0) {
             player.y = player.y - 1;
           }
         },
         ArrowRight(player) {
-          console.log('Moving player up');
           if (player.x + 1 < screen.height) {
             player.x = player.x + 1;
           }
         },
         ArrowDown(player) {
-          console.log('Moving player up');
           if (player.y + 1 < screen.height) {
             player.y = player.y + 1;
           }
         },
         ArrowLeft(player) {
-          console.log('Moving player up');
           if (player.x - 1 >= 0) {
             player.x = player.x - 1;
           }
@@ -91,30 +87,26 @@
         }
 
         function movePlayer(command) {
-          console.log(`Moving ${command.playerId} with ${command.keyPressed}`);
           const keyPressed = command.keyPressed;
           const player = state.players[currentPlayerId];
+          const playerId = command.playerId;
           const moveFunction = acceptedMoves[keyPressed];
 
           if (player && moveFunction) {
             moveFunction(player);
-            checkForFruitCollision();
+            checkForFruitCollision(playerId);
           }
           return;
         }
 
-        function checkForFruitCollision() {
-          for (const playerId in state.players) {
-            const player = state.players[playerId];
+        function checkForFruitCollision(playerId) {
+          const player = state.players[playerId];
 
-            for (const fruitId in state.fruits) {
-              const fruit = state.fruits[fruitId];
-              console.log(`Checking ${player}`);
+          for (const fruitId in state.fruits) {
+            const fruit = state.fruits[fruitId];
 
-              if (player.x === fruit.x && player.y === fruit.y) {
-                console.log(`COLLISION BETWEEN ${playerId}`);
-                removeFruit({fruitId});
-              }
+            if (player.x === fruit.x && player.y === fruit.y) {
+              removeFruit({fruitId});
             }
           }
         }
@@ -147,8 +139,6 @@
         }
 
         function notifyAll(command) {
-          console.log(`Notifying ${state.observers.length} observers`);
-
           for (const observerFunction of state.observers) {
             observerFunction(command);
           }

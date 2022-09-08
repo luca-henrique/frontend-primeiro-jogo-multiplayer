@@ -15,6 +15,7 @@
 - Acoplamento
 - Injeção de dependencia
 - Object literals
+- QuadTree
 
 # Design Patterns
 

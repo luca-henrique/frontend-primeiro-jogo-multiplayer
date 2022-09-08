@@ -4,7 +4,7 @@
 
 # Playlist do projeto
 
-- https://www.youtube.com/watch?v=Lf3ZV0UsnEo&list=PLMdYygf53DP5SVQQrkKCVWDS0TwYLVitL&index=8&ab_channel=FilipeDeschamps
+- https://www.youtube.com/watch?v=jA5XX7Fd8Ys&list=PLMdYygf53DP5SVQQrkKCVWDS0TwYLVitL&index=10&ab_channel=FilipeDeschamps
 
 # Conceitos
 

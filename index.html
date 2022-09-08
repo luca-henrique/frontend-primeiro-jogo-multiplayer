@@ -78,7 +78,7 @@
           const fruitX = command.fruitX;
           const fruitY = command.fruitY;
 
-          state.fruit[fruitId] = {
+          state.fruits[fruitId] = {
             x: fruitX,
             y: fruitY,
           };
@@ -98,8 +98,24 @@
 
           if (player && moveFunction) {
             moveFunction(player);
+            checkForFruitCollision();
           }
           return;
+        }
+
+        function checkForFruitCollision() {
+          for (const playerId in state.players) {
+            const player = state.players[playerId];
+
+            for (const fruitId in state.fruits) {
+              const fruit = state.fruits[fruitId];
+              console.log(`Checking ${player}`);
+
+              if (player.x === fruit.x && player.y === fruit.y) {
+                console.log(`COLLISION BETWEEN ${playerId}`);
+              }
+            }
+          }
         }
 
         return {
@@ -109,12 +125,17 @@
           removePlayer,
           addFruit,
           removeFruit,
+          checkForFruitCollision,
         };
       }
 
       const game = createGame();
       const keyboardListener = createKeyboradListener();
       keyboardListener.subsribe(game.movePlayer);
+
+      game.addPlayer({playerId: 'player1', playerX: 0, playerY: 0});
+      game.addPlayer({playerId: 'henrique', playerX: 1, playerY: 1});
+      game.addFruit({fruitId: 'fruit1', fruitX: 2, fruitY: 2});
 
       function createKeyboradListener() {
         const state = {
@@ -156,13 +177,14 @@
         context.clearRect(0, 0, 10, 10);
 
         for (const playerId in game.state.players) {
-          const player = state.players[playerId];
+          const player = game.state.players[playerId];
           context.fillStyle = 'black';
+
           context.fillRect(player.x, player.y, 1, 1);
         }
 
         for (const fruitId in game.state.fruits) {
-          const fruit = state.fruits[fruitId];
+          const fruit = game.state.fruits[fruitId];
           context.fillStyle = 'green';
           context.fillRect(fruit.x, fruit.y, 1, 1);
         }

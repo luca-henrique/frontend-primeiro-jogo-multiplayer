@@ -84,7 +84,7 @@
           };
         }
 
-        function removeFruit() {
+        function removeFruit(command) {
           const fruitId = command.fruitId;
 
           delete state.fruits[fruitId];
@@ -113,6 +113,7 @@
 
               if (player.x === fruit.x && player.y === fruit.y) {
                 console.log(`COLLISION BETWEEN ${playerId}`);
+                removeFruit({fruitId});
               }
             }
           }
@@ -134,7 +135,6 @@
       keyboardListener.subsribe(game.movePlayer);
 
       game.addPlayer({playerId: 'player1', playerX: 0, playerY: 0});
-      game.addPlayer({playerId: 'henrique', playerX: 1, playerY: 1});
       game.addFruit({fruitId: 'fruit1', fruitX: 2, fruitY: 2});
 
       function createKeyboradListener() {

@@ -8,7 +8,7 @@
 
 # Conceitos
 
-- Separation of converns
+- Separation of converns - https://www.youtube.com/watch?v=kE0y3CKsq4M&ab_channel=Robinson%2CoProgramador
 - POC
 - Clear screen
 - Arquitetura de Software

@@ -16,6 +16,7 @@
 - Observer
 - Factory
 - Injeção de dependencia
+- Object literals
 
 # Tecnlogias
 

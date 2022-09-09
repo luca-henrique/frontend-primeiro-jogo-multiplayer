@@ -24,24 +24,16 @@
       import createGame from './game.js';
       import renderScreen from './renderScreen.js';
 
-      let connected = false;
-
       const game = createGame();
       const keyboardListener = createKeyboardListener(document);
-
-      const screen = document.getElementById('screen');
-      renderScreen(screen, game, requestAnimationFrame);
 
       const socket = io();
 
       socket.on('connect', () => {
-        connected = true;
-        console.log('> Connected to server');
-      });
+        const playerId = socket.id;
+        const screen = document.getElementById('screen');
 
-      socket.on('disconnect', () => {
-        console.log('> Disconnected');
-        connected = false;
+        renderScreen(screen, game, requestAnimationFrame, playerId);
       });
 
       socket.on('setup', (state) => {
@@ -49,10 +41,21 @@
         game.setState(state);
         keyboardListener.registerPlayerId(playerId);
         keyboardListener.subscribe(game.movePlayer);
+
+        keyboardListener.subscribe((command) => {
+          socket.emit('move-player', command);
+        });
+      });
+
+      socket.on('move-player', (command) => {
+        const playerId = socket.id;
+
+        if (playerId !== command.playerId) {
+          game.movePlayer(command);
+        }
       });
 
       socket.on('add-player', (commamd) => {
-        console.log('Novo player');
         game.addPlayer(commamd);
       });
 

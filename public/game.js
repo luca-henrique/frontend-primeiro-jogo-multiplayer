@@ -41,7 +41,6 @@ export default function createGame() {
   }
 
   function removePlayer(command) {
-    console.log(command);
     const playerId = command.playerId;
 
     notifyAll({type: 'remove-player', playerId});
@@ -90,6 +89,8 @@ export default function createGame() {
   };
 
   function movePlayer(command) {
+    notifyAll(command);
+
     const keyPressed = command.keyPressed;
     const player = state.players[command.playerId];
     const playerId = command.playerId;

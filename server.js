@@ -11,11 +11,8 @@ const socket = new Server(server);
 const game = createGame();
 
 game.subscribe((command) => {
-  console.log('Emitting', command.type);
   socket.emit(command.type, command);
 });
-
-game.addFruit({fruitId: 'fruit1', fruitX: 2, fruitY: 2});
 
 app.use(express.static('public'));
 
@@ -28,6 +25,13 @@ socket.on('connection', (stream) => {
 
   stream.on('disconnect', () => {
     game.removePlayer({playerId});
+  });
+
+  stream.on('move-player', (command) => {
+    console.log('move');
+    command.playerId = playerId;
+    command.type = 'move-player';
+    game.movePlayer(command);
   });
 });
 

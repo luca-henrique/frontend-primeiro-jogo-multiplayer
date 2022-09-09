@@ -26,10 +26,8 @@ socket.on('connection', (stream) => {
 
   socket.emit('setup', game.state);
 
-  stream.on('disconnect', (stream) => {
-    console.log('aqui');
+  stream.on('disconnect', () => {
     game.removePlayer({playerId});
-    console.log('removeu');
   });
 });
 

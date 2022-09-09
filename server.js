@@ -10,18 +10,27 @@ const socket = new Server(server);
 
 const game = createGame();
 
-game.addPlayer({playerId: 'player1', playerX: 0, playerY: 0});
-game.addFruit({fruitId: 'fruit1', fruitX: 2, fruitY: 2});
+game.subscribe((command) => {
+  console.log('Emitting', command.type);
+  socket.emit(command.type, command);
+});
 
-console.log(game.state);
+game.addFruit({fruitId: 'fruit1', fruitX: 2, fruitY: 2});
 
 app.use(express.static('public'));
 
 socket.on('connection', (stream) => {
   const playerId = stream.id;
-  console.log('someone connected!' + playerId);
+
+  game.addPlayer({playerId});
 
   socket.emit('setup', game.state);
+
+  stream.on('disconnect', (stream) => {
+    console.log('aqui');
+    game.removePlayer({playerId});
+    console.log('removeu');
+  });
 });
 
 server.listen(3000, () => {

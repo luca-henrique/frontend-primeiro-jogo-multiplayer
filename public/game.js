@@ -5,23 +5,46 @@ export default function createGame() {
     screen: {width: 10, height: 10},
   };
 
+  const observers = [];
+
+  function subscribe(observerFunction) {
+    observers.push(observerFunction);
+  }
+
+  function notifyAll(command) {
+    for (const observerFunction of observers) {
+      observerFunction(command);
+    }
+  }
+
   function addPlayer(command) {
     const playerId = command.playerId;
-    const playerX = command.playerX;
-    const playerY = command.playerY;
+    const playerX =
+      'playerX' in command
+        ? command.playerX
+        : Math.floor(Math.random() * state.screen.width);
+    const playerY =
+      'playerY' in command
+        ? command.playerY
+        : Math.floor(Math.random() * state.screen.height);
 
     state.players[playerId] = {
       x: playerX,
       y: playerY,
     };
+
+    notifyAll({type: 'add-player', playerId, playerX, playerY});
   }
 
   function setState(newState) {
     Object.assign(state, newState);
   }
 
-  function removePlayer() {
+  function removePlayer(command) {
+    console.log(command);
     const playerId = command.playerId;
+
+    notifyAll({type: 'remove-player', playerId});
 
     delete state.players[playerId];
   }
@@ -100,5 +123,6 @@ export default function createGame() {
     removeFruit,
     checkForFruitCollision,
     setState,
+    subscribe,
   };
 }

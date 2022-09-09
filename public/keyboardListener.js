@@ -3,7 +3,7 @@ export default function createKeyboardListener(document) {
     observers: [],
   };
 
-  function subsribe(observerFunction) {
+  function subscribe(observerFunction) {
     state.observers.push(observerFunction);
   }
 
@@ -26,5 +26,5 @@ export default function createKeyboardListener(document) {
     notifyAll(command);
   }
 
-  return {subsribe, notifyAll};
+  return {subscribe, notifyAll};
 }

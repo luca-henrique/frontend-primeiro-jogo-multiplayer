@@ -23,6 +23,7 @@
 - Strategy
 - Observer
 - Factory
+- Event Emitter
 
 # Tecnlogias
 
@@ -48,3 +49,7 @@
     O trade-off é que no método 3 você precisa construir um lugar e a placa, mas vender pra 10 pessoas é o mesmo trabalho que vender pra 100.
 
 ˋˋˋ
+
+# Bug
+
+- socket.io: https://github.com/socketio/socket.io/issues/3676

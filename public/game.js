@@ -16,6 +16,10 @@ export default function createGame() {
     };
   }
 
+  function setState(newState) {
+    Object.assign(state, newState);
+  }
+
   function removePlayer() {
     const playerId = command.playerId;
 
@@ -95,5 +99,6 @@ export default function createGame() {
     addFruit,
     removeFruit,
     checkForFruitCollision,
+    setState,
   };
 }

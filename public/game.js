@@ -70,8 +70,6 @@ export default function createGame() {
       y: fruitY,
     };
 
-    console.log(state.fruits);
-
     notifyAll({
       type: 'add-fruit',
       fruitId,
@@ -82,6 +80,8 @@ export default function createGame() {
 
   function removeFruit(command) {
     const fruitId = command.fruitId;
+
+    notifyAll({type: 'remove-fruit', fruitId});
 
     delete state.fruits[fruitId];
   }

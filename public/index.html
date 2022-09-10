@@ -68,6 +68,10 @@
       socket.on('add-fruit', (commamd) => {
         game.addFruit(commamd);
       });
+
+      socket.on('remove-fruit', (commamd) => {
+        game.removeFruit(commamd);
+      });
     </script>
   </body>
 </html>

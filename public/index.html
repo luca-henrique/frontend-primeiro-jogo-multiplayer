@@ -25,6 +25,8 @@
       import renderScreen from './renderScreen.js';
 
       const game = createGame();
+      game.start();
+
       const keyboardListener = createKeyboardListener(document);
 
       const socket = io();
@@ -61,6 +63,10 @@
 
       socket.on('remove-player', (commamd) => {
         game.removePlayer(commamd);
+      });
+
+      socket.on('add-fruit', (commamd) => {
+        game.addFruit(commamd);
       });
     </script>
   </body>

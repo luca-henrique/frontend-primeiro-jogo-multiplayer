@@ -28,7 +28,6 @@ socket.on('connection', (stream) => {
   });
 
   stream.on('move-player', (command) => {
-    console.log('move');
     command.playerId = playerId;
     command.type = 'move-player';
     game.movePlayer(command);
